@@ -120,3 +120,8 @@ update_gp_par <-
                 ))
   }
 
+#' @export
+ljacob <- function(Z, Y, gev_loc, gev_scale, gev_shape){
+  sum(extRemes::devd(Z, loc = gev_loc, scale = gev_scale, shape = gev_shape, log = T) -
+    dnorm(Y, log = T))
+}
