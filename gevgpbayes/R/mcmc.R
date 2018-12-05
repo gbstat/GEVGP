@@ -234,15 +234,11 @@ mcmc_gevgp <-
           ll_prop <- -Inf
         }
         else{
-        Z_prop <- stablemix::qevdM(pnorm(Y_cur),
-                                   loc = matrix(gev_loc_prop, nrow = nloc, ncol = nrep),
-                                   scale = matrix(gev_scale_cur, nrow = nloc, ncol = nrep),
-                                   shape = matrix(gev_shape_cur, nrow = nloc, ncol = nrep))
         ll_prop <- llik_gp(gev_loc_prop, obs_coord = coord, gp_var = gev_loc_var_cur,
                           gp_scale = gev_loc_scale_cur,gp_smooth = 1/2) +
                   llik_gp(Y_prop, obs_coord = coord, gp_var = 1,
                           gp_scale = gp_scale_cur, gp_smooth = gp_smooth_cur) +
-                  ljacob(Z_prop, Y_prop,
+                  ljacob(Z_cur, Y_prop,
                          gev_loc = matrix(gev_loc_prop, nrow = nloc, ncol = nrep),
                          gev_scale = matrix(gev_scale_cur, nrow = nloc, ncol = nrep),
                          gev_shape = matrix(gev_shape_cur, nrow = nloc, ncol = nrep))
@@ -252,7 +248,6 @@ mcmc_gevgp <-
           gev_loc_cur[sub] <- gev_loc_prop[sub]
           ll_cur <- ll_prop
           Y_cur <- Y_prop
-          Z_cur <- Z_prop
         }
         else{
           acpt$gev_loc[pos, j] <- 0
@@ -293,15 +288,11 @@ mcmc_gevgp <-
           ll_prop <- -Inf
         }
         else{
-          Z_prop <- stablemix::qevdM(pnorm(Y_cur),
-                                     loc = matrix(gev_loc_cur, nrow = nloc, ncol = nrep),
-                                     scale = matrix(gev_scale_prop, nrow = nloc, ncol = nrep),
-                                     shape = matrix(gev_shape_cur, nrow = nloc, ncol = nrep))
           ll_prop <- llik_gp(log(gev_scale_prop), obs_coord = coord, gp_var = gev_scale_var_cur,
                              gp_scale = gev_scale_scale_cur,gp_smooth = 1/2) +
                     llik_gp(Y_prop, obs_coord = coord, gp_var = 1,
                             gp_scale = gp_scale_cur, gp_smooth = gp_smooth_cur) +
-                    ljacob(Z_prop, Y_prop,
+                    ljacob(Z_cur, Y_prop,
                            gev_loc = matrix(gev_loc_cur, nrow = nloc, ncol = nrep),
                            gev_scale = matrix(gev_scale_prop, nrow = nloc, ncol = nrep),
                            gev_shape = matrix(gev_shape_cur, nrow = nloc, ncol = nrep))
@@ -311,7 +302,6 @@ mcmc_gevgp <-
           gev_scale_cur[sub] <- gev_scale_prop[sub]
           ll_cur <- ll_prop
           Y_cur <- Y_prop
-          Z_cur <- Z_prop
         }
         else{
           acpt$gev_scale[pos, j] <- 0
@@ -343,13 +333,9 @@ mcmc_gevgp <-
           ll_prop <- -Inf
         }
         else{
-          Z_prop <- stablemix::qevdM(pnorm(Y_cur),
-                                     loc = matrix(gev_loc_cur, nrow = nloc, ncol = nrep),
-                                     scale = matrix(gev_scale_cur, nrow = nloc, ncol = nrep),
-                                     shape = matrix(gev_shape_prop, nrow = nloc, ncol = nrep))
           ll_prop <- llik_gp(Y_prop, obs_coord = coord, gp_var = 1,
                             gp_scale = gp_scale_cur, gp_smooth = gp_smooth_cur) +
-                    ljacob(Z_prop, Y_prop,
+                    ljacob(Z_cur, Y_prop,
                            gev_loc = matrix(gev_loc_cur, nrow = nloc, ncol = nrep),
                            gev_scale = matrix(gev_scale_cur, nrow = nloc, ncol = nrep),
                            gev_shape = matrix(gev_shape_prop, nrow = nloc, ncol = nrep))
@@ -359,7 +345,6 @@ mcmc_gevgp <-
           gev_shape_cur <- gev_shape_prop
           ll_cur <- ll_prop
           Y_cur <- Y_prop
-          Z_cur <- Z_prop
         }
         else{
           acpt$gev_shape[pos] <- 0
