@@ -32,6 +32,7 @@ mcmc_gevgp <-
       options(error = quote(dump.frames("gevgp_mcmc_dump", to.file = TRUE, include.GlobalEnv = TRUE)))
       # to load, run load("intensity_dump.rda") and debugger(intensity_dump)
     }
+    RFoptions(spConform=FALSE)
     # Overwrite any defaults in lists that have been passed -------------------
     # Get the default arguments in this function and set them
     form_arg <- formals(mcmc_gevgp)
@@ -125,8 +126,8 @@ mcmc_gevgp <-
     gev_loc_cur <- init$gev_loc
     gev_scale_cur <- init$gev_scale
     gev_shape_cur <- init$gev_shape
-    gev_loc_var_cur <- init$gev_loc_scale
-    gev_loc_scale_cur <- init$gev_loc_var
+    gev_loc_var_cur <- init$gev_loc_var
+    gev_loc_scale_cur <- init$gev_loc_scale
     gev_scale_var_cur <- init$gev_scale_var
     gev_scale_scale_cur <- init$gev_scale_scale
 
