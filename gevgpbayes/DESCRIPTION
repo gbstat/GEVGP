@@ -9,5 +9,16 @@ Description: More about what it does (maybe more than one line)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-Imports: RandomFields, extRemes, stablemix
+Imports: 
+	RandomFields, 
+	extRemes, 
+	stablemix
+Requires: 
+	RandomFields, 
+	extRemes, 
+	stablemix
+Depends:
+	RandomFields, 
+	extRemes, 
+	stablemix
 RoxygenNote: 6.1.0
