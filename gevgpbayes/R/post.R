@@ -100,6 +100,7 @@ cond_loglik_one_it <-
     return(exp(ll))
   }
 
+#'@export
 cond_loglik <- function(Z_obs,
                         Z_hold,
                         obs_coord,
